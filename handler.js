@@ -1,11 +1,13 @@
 'use strict';
 
 module.exports.info = (event, context, callback) => {
+  let name = event.name;
+  let message = `Hello ${name}. Welcome to Lambda.`;
 
   const response = {
     statusCode: 200,
     body: JSON.stringify({
-      message: 'Adams node is ready',
+      message: message,
       input: event,
     }),
   };
