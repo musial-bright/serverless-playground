@@ -14,6 +14,12 @@ module.exports.load = (event, context, callback) => {
     };
 
     callback(null, response);
+  }).catch(error => {
+    console.error(error)
+    callback(null, {
+      statusCode: 404,
+      body: null
+    })
   });
 };
 
@@ -29,5 +35,11 @@ module.exports.save = (event, context, callback) => {
     };
 
     callback(null, response);
-  })
+  }).catch(error => {
+    console.error(error)
+    callback(null, {
+      statusCode: 422,
+      body: null
+    })
+  });
 };

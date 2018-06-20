@@ -13,7 +13,8 @@ serverless deploy -v
 serverless deploy function -f load
 
 # invoke function with example data
-serverless invoke -f load -l --path fixtures/user-data.json
+serverless invoke -f save -l --path fixtures/storage.json
+serverless invoke -f load -l
 
 # remove service
 serverless deploy remove
