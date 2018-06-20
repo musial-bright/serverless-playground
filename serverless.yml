@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: adams-node # NOTE: update this with your service name
+service: adams-serverless # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -55,17 +55,24 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  info:
-    handler: handler.info
-
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
+  load:
+    handler: handler.load
     events:
       - http:
-          path: info
+          path: load
           method: get
           cors: true
+      - s3:
+        bucket: adams-files
+  save:
+    handler: handler.save
+    events:
+      - http:
+          path: save
+          method: post
+          cors: true
+      - s3:
+        bucket: adams-files
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic
@@ -93,12 +100,12 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
+resources:
+  Resources:
+    NewResource:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: adams-serverless-files
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"
