@@ -27,6 +27,17 @@ provider:
 
   environment:
     s3Bucket: adams-serverless-files
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:*"
+      Resource:
+        Fn::Join:
+          - ""
+          - - "arn:aws:s3:::"
+            - "Ref": "StorageBucket"
+            - "/*"
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"
@@ -101,7 +112,7 @@ functions:
 # you can add CloudFormation resource templates here
 resources:
   Resources:
-    NewResource:
+    StorageBucket:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:provider.environment.s3Bucket}

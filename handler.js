@@ -18,16 +18,16 @@ module.exports.load = (event, context, callback) => {
 };
 
 module.exports.save = (event, context, callback) => {
-  let storage = new Storage();
-  storage.save(event.data);
+  let storage = new Storage(process.env.s3Bucket, 'store.json');
+  storage.save(event).then(s3response => {
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: "saved",
+        input: event,
+      }),
+    };
 
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: "saved",
-      input: event,
-    }),
-  };
-
-  callback(null, response);
+    callback(null, response);
+  })
 };
