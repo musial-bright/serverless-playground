@@ -1,35 +1,10 @@
 'use strict';
 
-const AWS = require('aws-sdk');
-
-class Storage {
-
-  constructor() {
-    this.config = {
-      s3: { Bucket: "adams-serverless-files", Key: "store.json"}
-    }
-  }
-
-  load(callback) {
-    var s3 = new AWS.S3();
-    s3.getObject(this.config.s3, (err, data) => {
-      if (err) {
-        console.err(err);
-      } else {
-        callback(data.Body.toString());
-      }
-    });
-  }
-
-  save(data) {
-
-  }
-}
-
+const Storage = require("./services/storage");
 
 module.exports.load = (event, context, callback) => {
-  let storage = new Storage();
-  storage.load((data) => {
+  let storage = new Storage(process.env.s3Bucket, 'store.json');
+  storage.load().then(data => {
     const response = {
       statusCode: 200,
       body: JSON.stringify({

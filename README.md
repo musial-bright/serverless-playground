@@ -10,10 +10,10 @@ AWS quick guide: https://serverless.com/framework/docs/providers/aws/guide/quick
 serverless deploy -v
 
 # deploy just a function
-serverless deploy function -f info
+serverless deploy function -f load
 
 # invoke function with example data
-serverless invoke -f info -l --path fixtures/user-data.json
+serverless invoke -f load -l --path fixtures/user-data.json
 
 # remove service
 serverless deploy remove

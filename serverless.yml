@@ -25,6 +25,8 @@ provider:
   stage: dev
   region: eu-central-1
 
+  environment:
+    s3Bucket: adams-serverless-files
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"
@@ -62,8 +64,7 @@ functions:
           path: load
           method: get
           cors: true
-      - s3:
-        bucket: adams-files
+
   save:
     handler: handler.save
     events:
@@ -71,8 +72,6 @@ functions:
           path: save
           method: post
           cors: true
-      - s3:
-        bucket: adams-files
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic
@@ -105,7 +104,7 @@ resources:
     NewResource:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: adams-serverless-files
+        BucketName: ${self:provider.environment.s3Bucket}
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"
