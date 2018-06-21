@@ -10,7 +10,7 @@ class Storage {
     }
   }
 
-  load(key) {
+  load() {
     let s3 = new AWS.S3();
     let promise = s3.getObject(this.config.s3).promise();
 
