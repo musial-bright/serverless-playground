@@ -5,7 +5,7 @@ Based on https://serverless.com
 AWS quick guide: https://serverless.com/framework/docs/providers/aws/guide/quick-start/
 
 ## Examples
--  mini JSON storage service for s3
+-  mini JSON storage service for AWS S3
 
 ## Run example
 ```
