@@ -17,5 +17,5 @@ serverless invoke -f save -l --path fixtures/storage.json
 serverless invoke -f load -l
 
 # remove service
-serverless deploy remove
+serverless remove
 ```
