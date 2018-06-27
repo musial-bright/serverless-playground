@@ -1,6 +1,7 @@
 'use strict';
 
 const Storage = require("./services/storage");
+const loremIpsum = require('lorem-ipsum');
 
 module.exports.load = (event, context, callback) => {
   let storage = new Storage(process.env.s3Bucket, 'store.json');
@@ -22,4 +23,9 @@ module.exports.save = (event, context, callback) => {
     console.error(error)
     callback(null, { statusCode: 422, body: null });
   });
+};
+
+module.exports.talk = (event, context, callback) => {
+  let message = loremIpsum();
+  callback(null, { statusCode: 200, body: message })
 };

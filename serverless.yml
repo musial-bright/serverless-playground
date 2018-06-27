@@ -67,6 +67,13 @@ package:
     - fixtures/**
 
 functions:
+  talk:
+    handler: handler.talk
+    events:
+      - http:
+          path: talk
+          method: get
+
   load:
     handler: handler.load
     events:
