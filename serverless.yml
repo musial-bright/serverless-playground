@@ -73,6 +73,7 @@ functions:
       - http:
           path: talk
           method: get
+          cors: true
 
   load:
     handler: handler.load
