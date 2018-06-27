@@ -10,7 +10,7 @@ module.exports.load = (event, context, callback) => {
     callback(null, response);
   }).catch(error => {
     console.error(error)
-    callback(null, { statusCode: 404, body: null })
+    callback(null, { statusCode: 404, body: null });
   });
 };
 
@@ -27,5 +27,9 @@ module.exports.save = (event, context, callback) => {
 
 module.exports.talk = (event, context, callback) => {
   let message = loremIpsum({ count: 7, unit: "sentences" });
-  callback(null, { statusCode: 200, body: message })
+  callback(null, {
+    statusCode: 200,
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    body: message
+  });
 };
