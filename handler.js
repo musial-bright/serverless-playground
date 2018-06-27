@@ -26,6 +26,6 @@ module.exports.save = (event, context, callback) => {
 };
 
 module.exports.talk = (event, context, callback) => {
-  let message = loremIpsum();
+  let message = loremIpsum({ count: 7, unit: "sentences" });
   callback(null, { statusCode: 200, body: message })
 };
